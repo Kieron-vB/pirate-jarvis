@@ -1,3 +1,1 @@
-# Pirate Jarvis
-
-A Telegram client that allows users to search, add, and monitor torrents on a remote VPN server using qBittorrent.
+Yo ho ho and a bottle of rum.
