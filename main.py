@@ -39,14 +39,22 @@ async def download(update: Update, context: ContextTypes.DEFAULT_TYPE):
             text="Downloading..."
             )
 
+async def status(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    for torrent in qbt_client.torrents_info():
+        await context.bot.send_message(
+                chat_id=update.effective_chat.id,
+                text=f"{torrent.hash[-6:]}: {torrent.name} ({torrent.state})"
+                )
+
 if __name__ == '__main__':
     application = ApplicationBuilder().token(TOKEN).build()
 
     start_handler = CommandHandler('start', start)
     download_handler = CommandHandler('download', download)
-
+    status_handler = CommandHandler('status', status)
 
     application.add_handler(start_handler)
     application.add_handler(download_handler)
+    application.add_handler(status_handler)
 
     application.run_polling()
